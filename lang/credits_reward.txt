@@ -1,0 +1,14 @@
+[en]
+REWARD_KILL = You've got &x04%d &x01credits for killing &x04%s&x01.
+REWARD_ROUND = You've got &x04%d &x01credits for winning the round.
+REWARD_CT_DEATH = You've got &x04%d &x01credits because &x04%d &x06CTs &x01have died this round.
+
+[pt]
+REWARD_KILL = Você recebeu &x04%d &x01créditos por matar &x04%s&x01.
+REWARD_ROUND = Você recebeu &x04%d &x01créditos por vencer a rodada.
+REWARD_CT_DEATH = Você recebeu &x04%d &x01créditos porque &x04%d &x06CTs &x01morreram nesta rodada.
+
+[ro]
+REWARD_KILL = Ai primit &x04%d &x01credite pentru uciderea lui &x04%s&x01.
+REWARD_ROUND = Ai primit &x04%d &x01credite pentru câștigarea rundei.
+REWARD_CT_DEATH = Ai primit &x04%d &x01credite pentru că &x04%d &x06CT-uri &x01au murit în această rundă.

@@ -6,13 +6,11 @@
 #include <credits>
 
 #pragma reqlib "vip"
-
 native isPlayerVip(id);
 
 #define PLUGIN "Credits Rewards"
-#define VERSION "0.1"
+#define VERSION "1.0"
 #define AUTHOR "MrShark45"
-
 
 
 new g_iCTDeaths;
@@ -25,8 +23,11 @@ public plugin_init() {
 	//Terro WIN
 	register_logevent("terrorist_won" , 6, "3=Terrorists_Win", "3=Target_Bombed") 
 
-	CC_SetPrefix("&x04[LLG]") 
+	CC_SetPrefix("&x04[Credits]") 
+}
 
+public plugin_cfg() {
+	register_dictionary("credits_reward.txt");
 }
 
 public terrorist_won(){
@@ -36,9 +37,10 @@ public terrorist_won(){
 	new gain = isPlayerVip(terro)? 100 : 50;
 	
 	set_user_credits(terro,  get_user_credits(terro) + gain);
-	CC_SendMessage(terro, "&x01Ai primit &x04%d &x01credite pentru ca ai &x04castigat &x01runda!", gain);
-	CC_SendMessage(terro, "&x01Ai primit &x04%d &x01credite pentru ca au murit &x04%d &x06CT!", g_iCTDeaths*2, g_iCTDeaths);
-	CC_SendMessage(terro, "&x01Credite curente: &x04%d&x01!", get_user_credits(terro));
+	CC_SendMessage(terro, "%L", terro, "REWARD_ROUND", gain);
+	CC_SendMessage(terro, "%L", terro, "REWARD_CT_DEATH",  g_iCTDeaths*2, g_iCTDeaths);
+
+	g_iCTDeaths = 0;
 }
 
 public player_killed(victim, attacker){
@@ -47,25 +49,23 @@ public player_killed(victim, attacker){
 	terro = terrorists[0];
 
 	if(attacker != victim && is_user_alive(attacker)){
+		new szName[32];
+		get_user_name(victim, szName, charsmax(szName));
+		new gain;
+
 		if(cs_get_user_team(attacker) == CS_TEAM_T){
-			new gain = isPlayerVip(attacker)? 10 : 5;
-			new credits = get_user_credits(attacker);
-			set_user_credits(attacker, get_user_credits(attacker) + gain);
-			CC_SendMessage(attacker, "&x01Ai primit &x04%d &x01credite pentru ca ai &x07ucis &x01un &x06CT&x01!", gain);
-			CC_SendMessage(attacker, "&x01Credite curente: &x04%d&x01!", credits+gain);
+			gain = isPlayerVip(attacker)? 10 : 5;
 		}
 		else{
-			new gain = isPlayerVip(attacker)? 40 : 20;
-			new credits = get_user_credits(attacker);
-			CC_SendMessage(attacker, "&x01Ai primit &x04%d &x01credite pentru ca ai &x07ucis teroristul&x01!", gain);
-			set_user_credits(attacker, credits + gain);
-			CC_SendMessage(attacker, "&x01Credite curente: &x04%d&x01!", credits+gain);
+			gain = isPlayerVip(attacker)? 40 : 20;
 		}
+
+		set_user_credits(attacker, get_user_credits(attacker) + gain);
+		CC_SendMessage(attacker, "%L", attacker, "REWARD_KILL", gain, szName);
 	}
 	if(is_user_alive(terro) && !is_user_alive(attacker)){
 		new gain = isPlayerVip(terro)? 4 : 2;
-		new credits = get_user_credits(terro);
-		set_user_credits(terro, credits + gain);
+		set_user_credits(terro, get_user_credits(terro) + gain);
 		g_iCTDeaths++;
 	}
 }

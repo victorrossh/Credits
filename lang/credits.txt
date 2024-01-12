@@ -1,0 +1,7 @@
+[en]
+DISPLAY_CREDITS_MSG = &x04%s &x01has &x04%d &x01credits.
+RECEIVE_CREDITS_MSG = You received &x04%d &x01credits.
+RECEIVE_CREDITS_FROM_MSG = You received &x04%d &x01credits from &x04%s&x01.
+SEND_CREDITS_MSG = You sent &x04%d &x01credits to player &x04%s&x01.
+PLAYERS_MSG = There are no players on the server.
+NOT_ENOUGH_MSG = You don't have enough credits.

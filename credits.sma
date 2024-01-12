@@ -13,12 +13,12 @@ new g_hVault;
 public plugin_init() {
 	register_plugin(PLUGIN, VERSION, AUTHOR);
 
-	register_clcmd("say /credits", "Show_Credits");
-	register_clcmd("amx_give", "GiveCredits", ADMIN_IMMUNITY, "amx_give <name> <amount>");
+	register_clcmd("say", "handle_say");
+	register_clcmd("amx_give", "give_credits", ADMIN_IMMUNITY, "amx_give <name> <amount>");
 
-	register_concmd("amx_givecredits", "GiveCreditsName", ADMIN_IMMUNITY);
+	register_concmd("amx_givecredits", "give_credits_name", ADMIN_IMMUNITY);
 
-	CC_SetPrefix("&x04[DR]");
+	CC_SetPrefix("&x04[Credits]");
 }
 
 public plugin_cfg(){
@@ -26,6 +26,8 @@ public plugin_cfg(){
 
 	if(g_hVault == INVALID_HANDLE)
 		set_fail_state("Error opening vault!");
+
+	register_dictionary("credits.txt");
 }
 
 public plugin_end(){
@@ -43,7 +45,26 @@ public plugin_natives(){
 
 }
 
-public GiveCredits(id, lvl, cid){
+public handle_say(id){
+    new szArgs[128];
+    read_argv(1, szArgs, charsmax(szArgs));
+
+    new pos = containi(szArgs, "/credits");
+    if(pos != 0) return PLUGIN_CONTINUE;
+
+    replace(szArgs, charsmax(szArgs), "/credits ", "");
+    new target = find_player("bl", szArgs);
+    
+    if(!target) target = id;
+
+    new szName[64];
+    get_user_name(target, szName, charsmax(szName));
+    CC_SendMessage(id, "%L", id, "DISPLAY_CREDITS_MSG", szName, get_user_credits(target));
+
+    return PLUGIN_HANDLED;
+}
+
+public give_credits(id, lvl, cid){
 	if(!cmd_access(id, lvl, cid, 0))
 		return PLUGIN_HANDLED
 
@@ -59,7 +80,7 @@ public GiveCredits(id, lvl, cid){
 		get_players(players, iPlayers, "ch");
 		for(new i;i<iPlayers;i++)
 		{
-			CC_SendMessage(players[i], "&x01Ai primit &x04%d &x01credite!", num);
+			CC_SendMessage(players[i], "%L", id, "RECEIVE_CREDITS_MSG", num);
 			set_user_credits(players[i], get_user_credits(players[i])+num);
 		}
 
@@ -72,12 +93,12 @@ public GiveCredits(id, lvl, cid){
 
 	get_user_name(target, szName, charsmax(szName));
 
-	CC_SendMessage(id, "&x01I-ai trimis &x04%d &x01credite lui %s!", num, szName);
-	CC_SendMessage(target, "&x01Ai primit &x04%d &x01credite!", num);
+	CC_SendMessage(id, "%L", id, "SEND_CREDITS_MSG", num, szName);
+	CC_SendMessage(target, "%L", id, "RECEIVE_CREDITS_MSG", num);
 	return PLUGIN_HANDLED;
 }
 
-public GiveCreditsName(id, lvl, cid){
+public give_credits_name(id, lvl, cid){
 	if(!cmd_access(id, lvl, cid, 0) && id != 0)
 		return PLUGIN_HANDLED
 
@@ -147,18 +168,4 @@ public get_user_credits_name(szName[]){
 	nvault_get(g_hVault, szName, value, sizeof(value));
 
 	return str_to_num(value);
-}
-
-public Show_Credits(id){
-	new szName[64];
-	read_argv(2, szName, charsmax(szName));
-	if(strlen(szName)){
-		new target = find_player("bl", szName);
-		CC_SendMessage(id, "&x01%s are &x04%d &x01credite!", get_user_credits(target));
-		
-		return PLUGIN_HANDLED;
-	}
-		
-	CC_SendMessage(id, "&x01Ai &x04%d &x01credite!", get_user_credits(id));
-	return PLUGIN_HANDLED;
 }
