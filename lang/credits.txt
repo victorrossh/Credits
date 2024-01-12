@@ -5,3 +5,19 @@ RECEIVE_CREDITS_FROM_MSG = You received &x04%d &x01credits from &x04%s&x01.
 SEND_CREDITS_MSG = You sent &x04%d &x01credits to player &x04%s&x01.
 PLAYERS_MSG = There are no players on the server.
 NOT_ENOUGH_MSG = You don't have enough credits.
+
+[pt]
+DISPLAY_CREDITS_MSG = &x04%s &x01possui &x04%d &x01créditos.
+RECEIVE_CREDITS_MSG = Você recebeu &x04%d &x01créditos.
+RECEIVE_CREDITS_FROM_MSG = Você recebeu &x04%d &x01créditos de &x04%s&x01.
+SEND_CREDITS_MSG = Você enviou &x04%d &x01créditos para o jogador &x04%s&x01.
+PLAYERS_MSG = Não há jogadores no servidor.
+NOT_ENOUGH_MSG = Você não tem créditos suficientes.
+
+[ro]
+DISPLAY_CREDITS_MSG = &x04%s &x01are &x04%d &x01credite.
+RECEIVE_CREDITS_MSG = Ai primit &x04%d &x01credite.
+RECEIVE_CREDITS_FROM_MSG = Ai primit &x04%d &x01credite de la &x04%s&x01.
+SEND_CREDITS_MSG = Ai trimis &x04%d &x01credite către jucătorul &x04%s&x01.
+PLAYERS_MSG = Nu există jucători pe server.
+NOT_ENOUGH_MSG = Nu ai suficiente credite.
