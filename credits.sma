@@ -18,7 +18,7 @@ public plugin_init() {
 
 	register_concmd("amx_givecredits", "give_credits_name", ADMIN_IMMUNITY);
 
-	CC_SetPrefix("&x04[Credits]");
+	CC_SetPrefix("&x04[FWO]");
 }
 
 public plugin_cfg(){

@@ -23,7 +23,7 @@ public plugin_init() {
 	//Terro WIN
 	register_logevent("terrorist_won" , 6, "3=Terrorists_Win", "3=Target_Bombed") 
 
-	CC_SetPrefix("&x04[Credits]") 
+	CC_SetPrefix("&x04[FWO]") 
 }
 
 public plugin_cfg() {
