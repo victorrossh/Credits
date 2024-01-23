@@ -3,9 +3,12 @@
 #include <credits>
 #include <cromchat>
 
+native reg_is_user_logged(id);
+native reg_is_user_registered(id);
+
 #pragma tabsize 0
 
-#define szPrefixMenu "\r[Credits]"
+#define szPrefixMenu "\r[FWO]"
 
 new players_menu, players[32], num, i;
 new accessmenu, iName[64], callback;
@@ -26,7 +29,7 @@ public plugin_init()
 
 	register_clcmd("DONATE_CREDITS", "transfer_credits_msg");
 
-	CC_SetPrefix("&x04[Credits]");
+	CC_SetPrefix("&x04[FWO]");
 }
 public plugin_cfg() {
 	register_dictionary("credits.txt");
@@ -80,6 +83,11 @@ public transfer_credits(id)
 
 public transfer_credits_handler(id, players_menu, item)
 { 
+	if(!reg_is_user_logged(id) || !reg_is_user_registered(id)){
+		CC_SendMessage(id, "%L",id, "NOT_LOGGED_MSG")
+		return PLUGIN_CONTINUE;
+	}
+
 	if(item == MENU_EXIT)
 	{
 		menu_destroy(players_menu);

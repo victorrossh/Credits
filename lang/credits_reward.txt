@@ -8,6 +8,11 @@ REWARD_KILL = Você recebeu &x04%d &x01créditos por matar &x04%s&x01.
 REWARD_ROUND = Você recebeu &x04%d &x01créditos por vencer a rodada.
 REWARD_CT_DEATH = Você recebeu &x04%d &x01créditos porque &x04%d &x06CTs &x01morreram nesta rodada.
 
+[bp]
+REWARD_KILL = Você recebeu &x04%d &x01créditos por matar &x04%s&x01.
+REWARD_ROUND = Você recebeu &x04%d &x01créditos por vencer a rodada.
+REWARD_CT_DEATH = Você recebeu &x04%d &x01créditos porque &x04%d &x06CTs &x01morreram nesta rodada.
+
 [ro]
 REWARD_KILL = Ai primit &x04%d &x01credite pentru uciderea lui &x04%s&x01.
 REWARD_ROUND = Ai primit &x04%d &x01credite pentru câștigarea rundei.
