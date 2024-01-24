@@ -55,7 +55,7 @@ public transfer_credits(id)
 	get_players(players, num, "ch");  
 	if(num <= 1)
 	{		   
-		CC_SendMessage(id, "%L", id, "NO PLAYERS_MSG");
+		CC_SendMessage(id, "%L", id, "PLAYERS_MSG");
 		return PLUGIN_HANDLED;
 	}
 	
